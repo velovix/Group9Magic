@@ -12,21 +12,49 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Manages components of the in-game screen.
+ */
 class InGameScreen {
 
+    /**
+     * Coordinates and size of the hand display section. This is where cards in
+     * the user's hand will be shown.
+     */
     private static final int HAND_START_X = 165;
     private static final int HAND_START_Y = 590;
     private static final int HAND_WIDTH = 1173;
     private static final int HAND_HEIGHT = 177;
 
+    /**
+     * The player who is using the program.
+     */
     private Player user;
+
+    /**
+     * An opponent communicating to us from another instance of the program.
+     */
     private Player opponent;
 
-    private Image background;
+    /**
+     * The background image of the board. Contains unmoving components.
+     */
+    private BufferedImage background;
 
+    /**
+     * Button the user presses to mulligan their hand.
+     */
     private Button mulliganCards;
+
+    /**
+     * Button the user presses to accept their hand.
+     */
     private Button acceptCards;
 
+    /**
+     * Constructs a new in-game screen.
+     * @param parent the parent JFrame that we're displaying on
+     */
     InGameScreen(JFrame parent) throws Exception {
         // Use the mulligan scenario to make prebuilt decks
         Mulligan m = new Mulligan();
@@ -34,7 +62,7 @@ class InGameScreen {
         user.setHand(7);
         this.opponent = new Player("P2", new Deck());
 
-        // Construct buttons
+        // Construct the mulligan button
         mulliganCards = new Button(36, 455, "Mulligan");
         mulliganCards.setActive(true);
         parent.addMouseListener(mulliganCards);
@@ -45,6 +73,8 @@ class InGameScreen {
                 mulliganCards.setActive(false);
             }
         });
+
+        // Construct the accept button
         acceptCards = new Button(36, 400, "Accept");
         parent.addMouseListener(acceptCards);
         acceptCards.setRunnable(() -> {
@@ -58,9 +88,15 @@ class InGameScreen {
         background = Resources.getImage("resources/background.png");
     }
 
+    /**
+     * Draws all in-game objects.
+     * @param g the graphics to draw to
+     * @param observer the observer, important for some reason
+     */
     void draw(Graphics g, ImageObserver observer) throws IOException {
         g.drawImage(background, 0, 0, observer);
 
+        // Draw the user's hand
         List<Card> userHand = user.getHand();
         for (int i=0; i<userHand.size(); i++) {
             BufferedImage image = Resources.getCardImage(userHand.get(i).getMultiverseId());
@@ -73,6 +109,7 @@ class InGameScreen {
                     observer);
         }
 
+        // Components for doing a mulligan
         mulliganCards.draw(g, observer);
         acceptCards.draw(g, observer);
     }
