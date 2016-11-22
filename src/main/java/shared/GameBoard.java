@@ -1,6 +1,7 @@
 package shared;
 
-import java.util.List;
+import java.util.*;
+import shared.*;
 
 public class GameBoard
 {
