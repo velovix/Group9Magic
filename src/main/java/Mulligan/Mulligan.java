@@ -7,7 +7,7 @@ import shared.*;
 
 public class Mulligan
 {
-	private static Deck deck = new Deck();
+	private Deck deck = new Deck();
 	private Card akroanJailer;
 	private Card yokedOx;
 	private Card plains;
@@ -18,19 +18,27 @@ public class Mulligan
 	private Card negate;
 	private Card disperse;
 	private static boolean done = false;
+
+	public Mulligan() {
+		makeCards();
+		makeDeck();
+	}
 	
+    public Deck getDeck() {
+        return deck;
+    }
 	
 	private void makeCards()
 	{
-		akroanJailer = new Card("Akroan Jailer", new int[]{1}, new String[]{"white"}, "Creature", 1, 1);
-		yokedOx = new Card("Yoked Ox", new int[]{1}, new String[]{"white"}, "Creature", 0, 4);
-		plains = new Card("Plains", "Land");
-		celestialFlare = new Card("Celestial Flare", new int[]{2}, new String[]{"white"}, "Instant", "Target Player sacrifices an attacking or blocking creature.");
-		guideHartebeest = new Card("Totem-Guide HarteBeest", new int[]{4,1}, new String[]{"any", "white"}, "Creature", 2, 5);
-		maritimeGuard = new Card("Maritime Guard", new int[]{1,1}, new String[]{"any", "white"}, "Creature", 1, 3);
-		island = new Card("Island", "Land");
-		negate = new Card("Negate", new int[]{1, 1}, new String[]{"any", "blue"}, "Instant", "Counter target noncreature spell");
-		disperse = new Card("Disperse", new int[]{1, 1}, new String[]{"any", "blue"}, "Instant", "Return target nonland permanent to its owner's hand.");
+		akroanJailer = new Card("398656", "Akroan Jailer", new int[]{1}, new String[]{"white"}, "Creature", 1, 1);
+		yokedOx = new Card("398671", "Yoked Ox", new int[]{1}, new String[]{"white"}, "Creature", 0, 4);
+		plains = new Card("420954", "Plains", "Land");
+		celestialFlare = new Card("398488", "Celestial Flare", new int[]{2}, new String[]{"white"}, "Instant", "Target Player sacrifices an attacking or blocking creature.");
+		guideHartebeest = new Card("398599", "Totem-Guide HarteBeest", new int[]{4,1}, new String[]{"any", "white"}, "Creature", 2, 5);
+		maritimeGuard = new Card("398670", "Maritime Guard", new int[]{1,1}, new String[]{"any", "white"}, "Creature", 1, 3);
+		island = new Card("420959", "Island", "Land");
+		negate = new Card("416874", "Negate", new int[]{1, 1}, new String[]{"any", "blue"}, "Instant", "Counter target noncreature spell");
+		disperse = new Card("413371", "Disperse", new int[]{1, 1}, new String[]{"any", "blue"}, "Instant", "Return target nonland permanent to its owner's hand.");
 	}
 	
 	private void makeDeck()

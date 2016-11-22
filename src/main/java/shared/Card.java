@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Card
 {
+        private String multiverseId;
 	private String name;
 	private int[] mana; // mana could have multiple types
 	private String[] manaType; // white, blue, black, red, green, *todo look at adding validation to this
@@ -15,8 +16,9 @@ public class Card
 	/**
 	 * Constructor for creatures with abilities
 	 */
-	public Card(String n, int[] m, String[] mT, String t, int p, int tough, String a)
+	public Card(String mId, String n, int[] m, String[] mT, String t, int p, int tough, String a)
 	{
+                multiverseId = mId;
 		name = n;
 		mana = m;
 		manaType = mT;
@@ -29,8 +31,9 @@ public class Card
 	/**
 	 * Construct for creatures with no abilities
 	 */
-	public Card(String n, int[] m, String[] mT, String t, int p, int tough)
+	public Card(String mId,String n, int[] m, String[] mT, String t, int p, int tough)
 	{
+                multiverseId = mId;
 		name = n;
 		mana = m;
 		manaType = mT;
@@ -42,8 +45,9 @@ public class Card
 	/**
 	 * Constructor for Land Cards
 	 */
-	public Card(String n, String t)
+	public Card(String mId, String n, String t)
 	{
+                multiverseId = mId;
 		name = n;
 		type = t;
 	}
@@ -51,14 +55,19 @@ public class Card
 	/**
 	 * Constructor for Instant, Sorcery, and Enchantment cards
 	 */
-	public Card(String n, int[] m, String[] mT, String t, String a)
+	public Card(String mId, String n, int[] m, String[] mT, String t, String a)
 	{
+                multiverseId = mId;
 		name = n;
 		mana = m;
 		manaType = mT;
 		type = t;
 		ability = a;
 	}
+
+        public String getMultiverseId() {
+            return multiverseId;
+        }
 	
 	/**
 	 * Output the card into a readable string format.
