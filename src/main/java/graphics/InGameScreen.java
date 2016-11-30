@@ -27,6 +27,14 @@ class InGameScreen {
     private static final int HAND_HEIGHT = 177;
 
     /**
+     * Button coordinates.
+     */
+    private static final int BUTTON1_X = 36;
+    private static final int BUTTON1_Y = 455;
+    private static final int BUTTON2_X = 36;
+    private static final int BUTTON2_Y = 400;
+
+    /**
      * The player who is using the program.
      */
     private Player user;
@@ -63,7 +71,7 @@ class InGameScreen {
         this.opponent = new Player("P2", new Deck());
 
         // Construct the mulligan button
-        mulliganCards = new Button(36, 455, "Mulligan");
+        mulliganCards = new Button(BUTTON1_X, BUTTON1_Y, "Mulligan");
         mulliganCards.setActive(true);
         parent.addMouseListener(mulliganCards);
         mulliganCards.setRunnable(() -> {
@@ -75,7 +83,7 @@ class InGameScreen {
         });
 
         // Construct the accept button
-        acceptCards = new Button(36, 400, "Accept");
+        acceptCards = new Button(BUTTON2_X, BUTTON2_Y, "Accept");
         parent.addMouseListener(acceptCards);
         acceptCards.setRunnable(() -> {
             // The player accepted their hand and is ready to play
@@ -97,16 +105,14 @@ class InGameScreen {
         g.drawImage(background, 0, 0, observer);
 
         // Draw the user's hand
-        List<Card> userHand = user.getHand();
+        List<CardGfx> userHand = user.getHand();
         for (int i=0; i<userHand.size(); i++) {
-            BufferedImage image = Resources.getCardImage(userHand.get(i).getMultiverseId());
-            int cardWidth = image.getWidth();
-            int gap = (HAND_WIDTH % cardWidth) / userHand.size();
-            
-            g.drawImage(image,
-                    HAND_START_X + i * (cardWidth + gap),
-                    HAND_START_Y,
-                    observer);
+            if (!userHand.get(i).isFloating()) {
+                int cardWidth = image.getWidth();
+                int gap = (HAND_WIDTH % cardWidth) / userHand.size();
+                userHand.get(i)setX(HAND_START_X + i * (cardWidth + gap));
+                userHand.get(i).setY(HAND_START_Y);
+            }
         }
 
         // Components for doing a mulligan

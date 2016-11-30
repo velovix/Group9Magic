@@ -4,14 +4,29 @@ import java.util.Arrays;
 
 public class Card
 {
-        private String multiverseId;
-	private String name;
-	private int[] mana; // mana could have multiple types
-	private String[] manaType; // white, blue, black, red, green, *todo look at adding validation to this
-	private String type; // creature, Land, etc etc
-	private int power; // base power
-	private int toughness; // base toughness
-	private String ability;
+        protected String multiverseId;
+	protected String name;
+	protected int[] mana; // mana could have multiple types
+	protected String[] manaType; // white, blue, black, red, green, *todo look at adding validation to this
+	protected String type; // creature, Land, etc etc
+	protected int power; // base power
+	protected int toughness; // base toughness
+	protected String ability;
+
+        /**
+         * Sets the card values to the same as the given card.
+         * @param card the card to copy from 
+         */
+        public Card(Card card) {
+            multiverseId = card.multiverseId;
+            name = card.name;
+            mana = card.mana;
+            manaType = card.manaType;
+            type = card.type;
+            power = card.power;
+            toughness = card.toughness;
+            ability = card.ability;
+        }
 	
 	/**
 	 * Constructor for creatures with abilities
@@ -97,4 +112,5 @@ public class Card
 		}
 		return output;
 	}
+
 }
