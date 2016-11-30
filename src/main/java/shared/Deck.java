@@ -11,7 +11,14 @@ public class Deck
 
 	public Deck()
 	{
-		deck = new ArrayList<Card>();
+		deck = new ArrayList<>();
+	}
+
+	public Deck(Deck clonable) {
+		deck = new ArrayList<>();
+		for (Card card : clonable.deck) {
+			deck.add(new Card(card));
+		}
 	}
 	
 	/**

@@ -1,5 +1,12 @@
 package graphics;
 
+import shared.Card;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+
 class CardGfx extends Card {
 
     private BufferedImage image;
@@ -10,7 +17,7 @@ class CardGfx extends Card {
 
     private boolean floating;
 
-    public CardGfx(Card card) {
+    public CardGfx(Card card) throws IOException {
         super(card);
 
         image = Resources.getCardImage(multiverseId);
@@ -43,8 +50,17 @@ class CardGfx extends Card {
         return image.getHeight();
     }
 
+    public Rectangle getRect() {
+        return rect;
+    }
+
     public void draw(Graphics g, ImageObserver observer) {
-        g.drawImage(image, x, y, observer);
+        if (isTapped()) {
+            Image rotated = ImageUtils.rotate(image, 1.5708);
+            g.drawImage(rotated, x, y, observer);
+        } else {
+            g.drawImage(image, x, y, observer);
+        }
     }
 
 }

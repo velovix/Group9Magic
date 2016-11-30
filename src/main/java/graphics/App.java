@@ -30,27 +30,29 @@ public class App extends JFrame {
      * The effective entrypoint of the application.
      */
      App() throws Exception {
-        // Set some basic Swing settings
-        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
-        setFocusable(true);
-        createBufferStrategy(2);
-        setLayout(null);
+         // Set some basic Swing settings
+         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         setLocationRelativeTo(null);
+         setVisible(true);
+         setResizable(false);
+         setFocusable(true);
+         createBufferStrategy(2);
+         setLayout(null);
 
-        // Build the in-game screen
-        inGameScreen = new InGameScreen(this);
+         // Build the in-game screen
+         inGameScreen = new InGameScreen(this);
+         addMouseListener(inGameScreen);
+         addMouseMotionListener(inGameScreen);
 
-        // Start the main loop
-        mainLoop();
+         // Start the main loop
+         mainLoop();
     }
 
     /**
      * The main execution loop. Runs until the user quits the application.
      */
-    private void mainLoop() throws IOException {
+    private void mainLoop() throws IOException, FontFormatException {
         while (true) {
             draw();
         }
@@ -59,7 +61,7 @@ public class App extends JFrame {
     /**
      * Draws a single frame.
      */
-    private void draw() throws IOException {
+    private void draw() throws IOException, FontFormatException {
         BufferStrategy bf = getBufferStrategy();
         Graphics2D g = (Graphics2D) bf.getDrawGraphics();
 
